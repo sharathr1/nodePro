@@ -20,3 +20,21 @@ function returnSuccessRes(obj,res){
 	res.setHeader('Content-Type', 'text/plain');
 	res.end(obj + '\nStatus : '+res.statusCode);
 }
+//http://mherman.org/blog/2015/02/12/postgresql-and-nodejs/#.WkzgR_mWbDc
+const pg = require('pg')
+const conString = 'postgres://postgres:admin@localhost:5432/postgres' // make sure to match your own database's credentials
+
+pg.connect(conString, function (err, client, done) {
+  if (err) {
+    return console.error('error fetching client from pool', err)
+  }
+  client.query('SELECT $1::varchar AS my_first_query', ['postgres'], function (err, result) {
+    done()
+
+    if (err) {
+      return console.error('error happened during query', err)
+    }
+    console.log(result.rows[0])
+    process.exit(0)
+  })
+})
