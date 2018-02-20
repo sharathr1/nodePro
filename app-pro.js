@@ -1,3 +1,4 @@
+var http = require('http');
 var server = require('./sever');
 var routes = require('./router');
 var handler = require('./handler');
@@ -8,4 +9,4 @@ handle["/home"] = handler.home;
 handle["/review"] = handler.review;
 handle["/notFound"] = handler.notFound;
 
-server.startServer(routes.route, handle);
+server.startServer(http, routes.route, handle);

@@ -1,4 +1,4 @@
-var http = require('http');
+/*var http = require('http');*/
 var url = require('url');
 
 /*var onRequest = function (request, response) {
@@ -14,7 +14,7 @@ var url = require('url');
 /*function startServer(route) {
     http.createServer(onRequest).listen(8888);
 }*/
-function startServer(route, handle) {
+function startServer(http, route, handle) {
     var onRequest = function (request, response) {
         var pathname = url.parse(request.url).pathname;
         var reviewData = "";
@@ -24,7 +24,7 @@ function startServer(route, handle) {
             reviewData += chunk;
         });
         request.addListener("end", function () {
-            route(handle, pathname, response, reviewData);
+            route(http, handle, pathname, response, reviewData);
         })
         //  route(handle, pathname, response);
         /* response.writeHead(200, {

@@ -1,8 +1,9 @@
 var querString = require("querystring");
 
-function home(response) {
+function home(http, response) {
     console.log("Executing for Home ")
-    //response.redirect('./index.html');
+    // response.redirect('./index.html');
+    //    response.sendfile('./index.html');
     var html = '<html>' +
         '<meta charset="UTF-8">' +
         '<body>' +
@@ -17,7 +18,7 @@ function home(response) {
     sucesshtml(html, response);
 }
 
-function review(response, reviewData) {
+function review(http, response, reviewData) {
     console.log("Executing for review ")
     var html = '<html>' +
         '<meta charset="UTF-8">' +
