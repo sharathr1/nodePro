@@ -48,22 +48,67 @@ app.get('/index', function (req, res) {
 var url = "mongodb://localhost:27017/";
 
 app.get('/db', function (req, res) {
-    var dbres;
+    var dbres = [];
+
+    /*    var response = new Inventory(_id, item, qty, size, status, instock);
+     */
     console.log("Calling DB");
 
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db("testmangodb");
-        dbo.collection("teams").findOne({}, function (err, result) {
+        /*   dbo.collection("inventory").findOne({}, function (err, result) {
+               if (err) throw err;
+               console.log(result);
+               dbres = result;
+               res.json(dbres);
+           });*/
+        dbo.collection("inventory").find({
+            "qty": 50
+        }).toArray(function (err, result) {
             if (err) throw err;
             console.log(result);
             dbres = result;
-
+            var invList = [];
+            invList.push(new Inventory());
+            console.log(invList);
             res.json(dbres);
-
         });
         db.close();
     });
+
+
     console.log("completed DB query");
 });
 app.listen(8888, () => console.log('Example app listening on port 8888!'));
+
+function size(h, w, uom) {
+    // always initialize all instance properties
+    this.h = h;
+    this.w = w;
+    this.uom = uom;
+}
+
+function Size(h, w, uom) {
+    // always initialize all instance properties
+    this.h = h;
+    this.w = w;
+    this.uom = uom;
+}
+
+function Size() {
+    // always initialize all instance properties
+    this.h = null;
+    this.w = null;
+    this.uom = null;
+}
+
+function Inventory() {
+    // always initialize all instance properties
+    this._id = null;
+    this.item = null;
+    this.qty = null;
+    this.size = new Size();
+    this.status = null;
+}
+// class methods

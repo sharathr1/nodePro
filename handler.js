@@ -1,4 +1,6 @@
-var querString = require("querystring");
+{
+	"knownSymbols": {}
+}var querString = require("querystring");
 
 function home(http, response) {
     console.log("Executing for Home ")
