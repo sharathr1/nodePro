@@ -83,7 +83,7 @@ app.get('/db', function (req, res) {
 app.listen(8888, () => console.log('Example app listening on port 8888!'));
 
 function size(h, w, uom) {
-    // always initialize all instance properties
+    // always initialize all instance properties  size
     this.h = h;
     this.w = w;
     this.uom = uom;
